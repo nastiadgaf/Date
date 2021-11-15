@@ -1,0 +1,107 @@
+@font-face{
+    font-family: Gasrux;
+    src: url(font.otf);
+}
+body{
+    background-color: rgb(3, 3, 24);
+    color: rgb(63, 88, 148);
+    font-family: Gasrux;
+    font-size: 20px;
+}
+
+p{
+    font-size: 30px;
+}
+
+.date__clock, #date{
+    font-size: 35px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#block1{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+#block2, #block3{
+    padding-bottom: 25px;
+}
+
+.content_block{
+    background-color: rgb(1, 1, 30);
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.button {
+    background-color:rgb(2, 2, 34) ;
+    border: 1px solid rgb(63, 88, 148);
+    color: rgb(115, 115, 223);
+    border-radius: 35px;
+    width: 60px;
+    text-transform: uppercase;
+    height: 60px;
+}
+
+.plus_minus{
+    background-color:rgb(2, 2, 34) ;
+    border: 1px solid rgb(63, 88, 148);
+    color: rgb(115, 115, 223);
+    border-radius: 35px;
+    width: 60px;
+    height: 60px;
+}
+
+.time_block{
+    background-color:rgb(2, 2, 34) ;
+    border: 1px solid rgb(63, 88, 148);
+    border-radius: 5px;
+    width: 15%;
+    min-height: 150px;
+    margin-top: 20px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.time_block_text{
+    font-size: 20px;
+    margin: 0;
+}
+
+.time, .timer, .timer_block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timer_time, .timer_clock{
+    margin-bottom: 1px;
+}
+
+.text{
+    font-size: 30px;
+    margin: 10px 0 10px 0;
+    text-transform: uppercase;
+}
+
+.buttons{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.item{
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.item:last-of-type{
+    margin-right: 0;
+}
