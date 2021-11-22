@@ -31,18 +31,17 @@ class Timer {
             timer.innerHTML = `0${this.minutes}`;
         }
     }
-
-    updateSecondsString(){
-        console.log(this.seconds)
-        typeof(this.seconds)
-        if(this.seconds.length < 2){
-            
-            timerClock.innerHTML = `${this.minutes}:0${this.seconds}`;
-        }
-    }
+    formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
+    
     updateTimeValue(){
-        this.updateSecondsString();
-        timerClock.innerHTML = this.minutes + " : " + this.seconds;
+        let timeArr = [this.minutes, this.seconds];
+        let string = '';
+        for (let i = 0; i < timeArr.length; i++) {
+            string += this.formatNumToTwoCharStr(timeArr[i]);
+            if (i !== timeArr.length - 1) string += ':';
+        }
+        
+        timerClock.innerHTML = string;
     }
 
     decreaseBySecond() {
