@@ -17,7 +17,7 @@ class StopWatch {
     formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
     
     seconds() {
-        watch.innerHTML = this.hours + " : " + this.minutes + ": " + this.second + " : " + this.ms;
+        this.FormatNumber();
 
         if (this.ms == 100) {
             this.second++;
@@ -31,15 +31,19 @@ class StopWatch {
             this.hours++;
             this.minutes = 0;
         }
-        this.ms++;
+        this.ms++;    
+    }
 
+    FormatNumber(){
         const timeValues = [this.hours, this.minutes, this.second, this.ms]
-        let timeString = '';
+        let string = '';
 
         for (let i = 0; i < timeValues.length; i++) {
-            timeString += this.formatNumToTwoCharStr(timeValues[i]);
-            if (i !== timeValues.length - 1) timeString += " : "
+            string += this.formatNumToTwoCharStr(timeValues[i]);
+            if (i !== timeValues.length - 1) string += " : ";
         }
+
+        watch.innerHTML = string;
     }
 
     secondsWork() {
