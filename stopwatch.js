@@ -14,6 +14,8 @@ class StopWatch {
         this.ms = ms.toString();
     }
 
+    formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
+    
     seconds() {
         watch.innerHTML = this.hours + " : " + this.minutes + ": " + this.second + " : " + this.ms;
 
@@ -32,18 +34,11 @@ class StopWatch {
         this.ms++;
 
         const timeValues = [this.hours, this.minutes, this.second, this.ms]
-        //const formatNumToTwoCharStr = num => String(num).length > 1 ? String(num) : `0${String(num)}`;
-        let timeString;
+        let timeString = '';
 
-        const formatNumToTwoCharStr = (val) =>{
-            val = String(val);
-            if(val.length < 2) val = '0' + val;
-            return val;
-        }
-
-        for(let i = 0; i < timeValues.length; i++){
-            timeString  += formatNumToTwoCharStr(timeValues[i]);
-            if(i !== timeValues - 1) timeString += " : "
+        for (let i = 0; i < timeValues.length; i++) {
+            timeString += this.formatNumToTwoCharStr(timeValues[i]);
+            if (i !== timeValues.length - 1) timeString += " : "
         }
     }
 
@@ -81,8 +76,8 @@ class StopWatch {
         timeBlock.removeChild(timeBlock[0])
     }
 
-    resetLoopBlock(){
-        while(timeBlock.firstChild){
+    resetLoopBlock() {
+        while (timeBlock.firstChild) {
             timeBlock.removeChild(timeBlock.firstChild);
         }
     }
@@ -97,11 +92,11 @@ class StopWatch {
 
 let stopWatch = new StopWatch(0, 0, 0, 0);
 
-document.addEventListener('click', function(e){
-    function checkClassName(name){
+document.addEventListener('click', function (e) {
+    function checkClassName(name) {
         return e.target.classList.contains(name);
     }
-    switch(true){
+    switch (true) {
         case checkClassName('start'):
             stopWatch.secondsWork();
             start.disabled = true;
