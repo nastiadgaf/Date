@@ -1,5 +1,6 @@
 let clock = document.querySelector('#clock');
 let date = document.querySelector('#date');
+let daysDate = document.querySelector('.date-days')
 
 class DateToday {
     updateDate() {
@@ -10,42 +11,31 @@ class DateToday {
         this.days = now.getDate().toString();
         this.month = now.getMonth().toString();
         this.year = now.getFullYear().toString();
-    }
 
-    // formatNumToTwoCharStr = (val) =>{
-    //         val = String(val);
-    //         if(val.length < 2) val = '0' + val;
-    //         return val;
-    //     }
-
-    formatNumToTwoCharStr = num => String(num).length > 1 ? String(num) : `0${String(num)}`;
-
-    createTimeString() {
-        let time = [this.hours, this.minutes, this.seconds]
         
-        let clockString = '';
-
-        for(let i = 0; i < time.length; i++){
-            clockString  += this.formatNumToTwoCharStr(time[i]);
-            if(i !== time - 1) clockString += " : "
-        }
     }
-    
-    createTodayDateString() {
-        let date = [this.days, this.month, this.year]
 
-        let dateString = '';
+    formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
 
-        for(let i = 0; i < date.length; i++){
-            dateString  += this.formatNumToTwoCharStr(date[i]);
-            if(i !== date - 1) dateString += " : "
+    generateTimeString(array, separator) {
+        let string = '';
+        for (let i = 0; i < array.length; i++) {
+            string += this.formatNumToTwoCharStr(array[i]);
+            if (i !== array.length - 1) string += separator
         }
+        return string;
     }
+
+
 
     start() {
         this.updateDate();
-        this.createTimeString();
-        this.createTodayDateString();
+
+        let time = [this.hours, this.minutes, this.seconds]
+        clock.innerHTML = this.generateTimeString(time, ':');
+
+        let date = [this.days, ++this.month, this.year]
+        daysDate.innerHTML = this.generateTimeString(date, '.');
     }
 
     render() {
