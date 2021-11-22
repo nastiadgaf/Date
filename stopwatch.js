@@ -58,6 +58,7 @@ class StopWatch {
         this.minutes = '0';
         this.second = '0';
         this.ms = '0';
+        loopTextAmount = 0;
     }
 
     stop() {
@@ -68,7 +69,12 @@ class StopWatch {
     }
 
     loop() {
-        this.cleanLoopBlockByNumber();
+        
+        console.log(loopTextAmount)
+        if (loopTextAmount >= 4) {
+            timeBlock.firstChild.remove();
+            loopTextAmount = 4
+        }
         let loopText = document.createElement('p');
         loopText.classList.add('time_block_text')
         loopText.textContent = `${timeBlockText.textContent}${watch.textContent}`;
@@ -76,19 +82,10 @@ class StopWatch {
         loopTextAmount++;
     }
 
-    cleanLoopBlock() {
-        timeBlock.removeChild(timeBlock[0])
-    }
-
     resetLoopBlock() {
         while (timeBlock.firstChild) {
             timeBlock.removeChild(timeBlock.firstChild);
-        }
-    }
-
-    cleanLoopBlockByNumber() {
-        if (loopTextAmount === 5) {
-            this.cleanLoopBlock();
+            loopTextAmount = 0;
         }
     }
 
