@@ -51,9 +51,9 @@ class StopWatch {
     }
 
     reset() {
+        this.stop();
         watch.innerHTML = '00:00:00:000';
         this.resetLoopBlock();
-        clearInterval(this.stopWatchWork);
         this.hours = '0';
         this.minutes = '0';
         this.second = '0';
@@ -63,9 +63,7 @@ class StopWatch {
 
     stop() {
         clearInterval(this.stopWatchWork);
-        if (this.ms > 1) {
-            this.ms++;
-        }
+        if (this.ms > 1) this.ms++;
     }
 
     loop() {
@@ -94,22 +92,27 @@ class StopWatch {
 let stopWatch = new StopWatch(0, 0, 0, 0);
 
 document.addEventListener('click', function (e) {
-    function checkClassName(name) {
-        return e.target.classList.contains(name);
+    const actionTypes = ['start', 'reset', 'stop', 'loop'];
+
+    let currentType;
+
+    for(let type of actionTypes){
+        if(e.target.classList.contains(type)) currentType = type;
     }
-    switch (true) {
-        case checkClassName('start'):
+
+    switch (currentType) {
+        case 'start':
             stopWatch.secondsWork();
             start.disabled = true;
             break;
-        case checkClassName('reset'):
+        case 'reset':
             stopWatch.reset();
             break;
-        case checkClassName('stop'):
+        case 'stop':
             stopWatch.stop();
             start.disabled = false;
             break;
-        case checkClassName('loop'):
+        case 'loop':
             stopWatch.loop();
             break;
     }

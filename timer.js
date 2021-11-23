@@ -77,23 +77,28 @@ class Timer {
     let newTimer = new Timer();
 
 document.addEventListener('click', function(e){
-    function checkClassName(name){
-        return e.target.classList.contains(name);
+    const actionTypes = ['plus', 'minus', 'start_timer', 'reset_timer', 'stop_timer'];
+
+    let currentType;
+
+    for(let type of actionTypes){
+        if(e.target.classList.contains(type)) currentType = type;
     }
-    switch(true){
-        case checkClassName('plus'):
+
+    switch(currentType){
+        case 'plus':
             newTimer.plusWork();
             break;
-        case checkClassName('minus'):
+        case 'minus':
             newTimer.minusWork();
             break;
-        case checkClassName('start_timer'):
+        case 'start_timer':
             newTimer.startTimerWork();
             break;
-        case checkClassName('reset_timer'):
+        case 'reset_timer':
             newTimer.resetTimerWork();
             break;
-        case checkClassName('stop_timer'):
+        case 'stop_timer':
             newTimer.stopTimerWork();
             break;
     }
