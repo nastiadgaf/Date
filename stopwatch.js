@@ -87,6 +87,10 @@ class StopWatch {
         }
     }
 
+    unblockStartButton(){
+        start.disabled = false;
+    }
+
 }
 
 let stopWatch = new StopWatch(0, 0, 0, 0);
@@ -105,12 +109,13 @@ document.addEventListener('click', function (e) {
             stopWatch.secondsWork();
             start.disabled = true;
             break;
-        case 'reset':
+        case 'reset': 
             stopWatch.reset();
+            stopWatch.unblockStartButton();
             break;
         case 'stop':
             stopWatch.stop();
-            start.disabled = false;
+            stopWatch.unblockStartButton();
             break;
         case 'loop':
             stopWatch.loop();
