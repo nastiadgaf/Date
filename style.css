@@ -108,3 +108,7 @@ time{
 .item:last-of-type{
     margin-right: 0;
 }
+
+.timer__btn{
+    font-size: 18px;
+}
