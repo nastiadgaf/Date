@@ -5,7 +5,7 @@ let startTimer = document.querySelector('.start_timer');
 let stopTimer = document.querySelector('.stop_timer');
 let timerClock = document.querySelector('.timer_clock');
 let resetTimer = document.querySelector('.reset_timer');
-
+startTimer.disabled = true;
 class Timer {
     constructor() {
         this.minutes = +timer.innerHTML;
@@ -16,10 +16,14 @@ class Timer {
         this.minutes++;
         timer.innerHTML = this.minutes;
         this.updateString();
+        this.unblockStartButton();
     }
 
     minusWork() {
-        if (this.minutes < 1) return;
+        if (this.minutes < 1) {
+            this.blockStartButton();
+            return;
+        } 
         this.minutes--;
         timer.innerHTML = this.minutes;
         this.updateString();
@@ -60,11 +64,12 @@ class Timer {
 
     startTimerWork() {
         this.timerWork = setInterval(() => this.decreaseBySecond(), 1000);
-
+        this.blockStartButton();
     }
 
     stopTimerWork() {
         clearInterval(this.timerWork);
+        this.unblockStartButton();
     }
 
     resetTimerWork() {
@@ -74,13 +79,23 @@ class Timer {
         timer.innerHTML = 0;
         this.updateTimeValue();
         clearInterval(this.timerWork);
+        this.blockStartButton();
     }
 
     endTimerWork(){
         if(timerClock.innerHTML == '00:00'){
             this.stopTimerWork();
             this.resetTimerWork();
+            this.blockStartButton();
         } 
+    }
+
+    blockStartButton(){
+        startTimer.disabled = true;
+    }
+
+    unblockStartButton(){
+        startTimer.disabled = false;
     }
 }
 
