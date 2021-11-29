@@ -77,7 +77,7 @@ class Timer {
         timerClock.innerHTML = '00:00';
         this.minutes = 0;
         this.seconds = 0;
-        timer.innerHTML = 0;
+        timer.innerHTML = '00';
         this.updateTimeValue();
         clearInterval(this.timerWork);
         this.blockStartButton();

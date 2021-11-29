@@ -68,9 +68,9 @@ class StopWatch {
     }
 
     loop() {
-        if (loopTextAmount >= 4) {
+        if (loopTextAmount >= 5) {
             timeBlock.firstChild.remove();
-            loopTextAmount = 4
+            loopTextAmount = 5
         }
 
         let loopText = document.createElement('p');
