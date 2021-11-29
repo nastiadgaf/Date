@@ -6,6 +6,7 @@ let stopTimer = document.querySelector('.stop_timer');
 let timerClock = document.querySelector('.timer_clock');
 let resetTimer = document.querySelector('.reset_timer');
 startTimer.disabled = true;
+
 class Timer {
     constructor() {
         this.minutes = +timer.innerHTML;
