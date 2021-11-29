@@ -7,7 +7,7 @@ let timerClock = document.querySelector('.timer_clock');
 let resetTimer = document.querySelector('.reset_timer');
 
 class Timer {
-    constructor(){
+    constructor() {
         this.minutes = +timer.innerHTML;
         this.seconds = 0;
     }
@@ -19,73 +19,83 @@ class Timer {
     }
 
     minusWork() {
-        if (this.minutes < 1) return; 
-            this.minutes--;
-            timer.innerHTML = this.minutes;
-            this.updateString();
-        
+        if (this.minutes < 1) return;
+        this.minutes--;
+        timer.innerHTML = this.minutes;
+        this.updateString();
+
     }
 
-    updateString(){
-        if(timer.innerHTML.length < 2){
+    updateString() {
+        if (timer.innerHTML.length < 2) {
             timer.innerHTML = `0${this.minutes}`;
         }
     }
+
     formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
-    
-    updateTimeValue(){
+
+    updateTimeValue() {
         let timeArr = [this.minutes, this.seconds];
         let string = '';
         for (let i = 0; i < timeArr.length; i++) {
             string += this.formatNumToTwoCharStr(timeArr[i]);
             if (i !== timeArr.length - 1) string += ':';
         }
-        
+
         timerClock.innerHTML = string;
     }
 
     decreaseBySecond() {
-            if(this.seconds === 0){
-                this.minutes--;
-                this.seconds = 59;
-            } else{
-                this.seconds --;
-            }
-
-            this.updateTimeValue();
-            
+        if (this.seconds === 0) {
+            this.minutes--;
+            this.seconds = 59;
+        } else {
+            this.seconds--;
         }
 
-        startTimerWork() {
-            this.timerWork = setInterval(() => this.decreaseBySecond(), 1000);
-        }
+        this.updateTimeValue();
+        this.endTimerWork();
 
-        stopTimerWork() {
-            clearInterval(this.timerWork);
-        }
+    }
 
-        resetTimerWork() {
-            timerClock.innerHTML = '00:00';
-            this.minutes = 0;
-            this.seconds = 0;
-            timer.innerHTML = 0;
-            this.updateTimeValue();
-            clearInterval(this.timerWork);
-        }
+    startTimerWork() {
+        this.timerWork = setInterval(() => this.decreaseBySecond(), 1000);
+
+    }
+
+    stopTimerWork() {
+        clearInterval(this.timerWork);
+    }
+
+    resetTimerWork() {
+        timerClock.innerHTML = '00:00';
+        this.minutes = 0;
+        this.seconds = 0;
+        timer.innerHTML = 0;
+        this.updateTimeValue();
+        clearInterval(this.timerWork);
+    }
+
+    endTimerWork(){
+        if(timerClock.innerHTML == '00:00'){
+            this.stopTimerWork();
+            this.resetTimerWork();
+        } 
+    }
 }
 
-    let newTimer = new Timer();
+let newTimer = new Timer();
 
-document.addEventListener('click', function(e){
+document.addEventListener('click', function (e) {
     const actionTypes = ['plus', 'minus', 'start_timer', 'reset_timer', 'stop_timer'];
 
     let currentType;
 
-    for(let type of actionTypes){
-        if(e.target.classList.contains(type)) currentType = type;
+    for (let type of actionTypes) {
+        if (e.target.classList.contains(type)) currentType = type;
     }
 
-    switch(currentType){
+    switch (currentType) {
         case 'plus':
             newTimer.plusWork();
             break;

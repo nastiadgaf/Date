@@ -6,6 +6,7 @@ let reset = document.querySelector('.reset');
 let timeBlockText = document.querySelector('.time_block_text');
 let timeBlock = document.querySelector(".time_block");
 let loopTextAmount = 0;
+
 class StopWatch {
     constructor(h, m, s, ms) {
         this.hours = h.toString();
@@ -52,8 +53,8 @@ class StopWatch {
 
     reset() {
         this.stop();
-        watch.innerHTML = '00:00:00:000';
         this.resetLoopBlock();
+        watch.innerHTML = '00:00:00:000';
         this.hours = '0';
         this.minutes = '0';
         this.second = '0';
@@ -67,12 +68,11 @@ class StopWatch {
     }
 
     loop() {
-        
-        console.log(loopTextAmount)
         if (loopTextAmount >= 4) {
             timeBlock.firstChild.remove();
             loopTextAmount = 4
         }
+
         let loopText = document.createElement('p');
         loopText.classList.add('time_block_text')
         loopText.textContent = `${timeBlockText.textContent}${watch.textContent}`;
