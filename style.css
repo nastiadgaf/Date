@@ -1,14 +1,16 @@
 @font-face{
-    font-family: Gasrux;
-    src: url(font.otf);
+    font-family: Philosopher Family;
+    src: url(philosopher.woff2);
 }
 body{
     background-color: rgb(3, 3, 24);
     color: rgb(63, 88, 148);
-    font-family: Gasrux;
+    font-family: Philosopher Family;
     font-size: 20px;
 }
-
+button{
+    font-family: Philosopher Family;
+}
 time{
     display: block;
     font-size: 30px;
@@ -47,6 +49,7 @@ time{
     border-radius: 35px;
     width: 60px;
     text-transform: uppercase;
+    font-size: 16px;
     height: 60px;
 }
 

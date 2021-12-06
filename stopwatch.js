@@ -5,14 +5,18 @@ let stop = document.querySelector('.stop');
 let reset = document.querySelector('.reset');
 let timeBlockText = document.querySelector('.time_block_text');
 let timeBlock = document.querySelector(".time_block");
-let loopTextAmount = 0;
 
 class StopWatch {
-    constructor(h, m, s, ms) {
-        this.hours = h.toString();
-        this.minutes = m.toString();
-        this.second = s.toString();
-        this.ms = ms.toString();
+    constructor() {
+        this.setInitialText();
+    }
+
+    setInitialText(){
+        this.hours = '0';
+        this.minutes = '0';
+        this.second = '0';
+        this.ms = '0';
+        this.loopTextAmount = 0;
     }
 
     formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
@@ -53,13 +57,13 @@ class StopWatch {
 
     reset() {
         this.stop();
-        this.resetLoopBlock();
+        this.clearLoopBlock();
         watch.innerHTML = '00:00:00:000';
         this.hours = '0';
         this.minutes = '0';
         this.second = '0';
         this.ms = '0';
-        loopTextAmount = 0;
+        this.loopTextAmount = 0;
     }
 
     stop() {
@@ -68,32 +72,39 @@ class StopWatch {
     }
 
     loop() {
-        if (loopTextAmount >= 5) {
+        if (this.loopTextAmount >= 5) {
             timeBlock.firstChild.remove();
-            loopTextAmount = 5
+            this.loopTextAmount = 5
         }
 
         let loopText = document.createElement('p');
         loopText.classList.add('time_block_text')
         loopText.textContent = `${timeBlockText.textContent}${watch.textContent}`;
         timeBlock.append(loopText);
-        loopTextAmount++;
+        this.loopTextAmount++;
     }
 
-    resetLoopBlock() {
-        while (timeBlock.firstChild) {
-            timeBlock.removeChild(timeBlock.firstChild);
-            loopTextAmount = 0;
-        }
+    clearLoopBlock() {
+        timeBlock.innerHTML = '';
     }
 
     unblockStartButton(){
         start.disabled = false;
     }
 
+    blockLoopButton(){
+        loop.disabled = true;
+    }
+
+    unblockLoopButton(){
+        loop.disabled = false;
+    }
+
 }
 
 let stopWatch = new StopWatch(0, 0, 0, 0);
+
+stopWatch.blockLoopButton();
 
 document.addEventListener('click', function (e) {
     const actionTypes = ['start', 'reset', 'stop', 'loop'];
@@ -108,14 +119,17 @@ document.addEventListener('click', function (e) {
         case 'start':
             stopWatch.secondsWork();
             start.disabled = true;
+            stopWatch.unblockLoopButton();
             break;
         case 'reset': 
             stopWatch.reset();
             stopWatch.unblockStartButton();
+            stopWatch.blockLoopButton();
             break;
         case 'stop':
             stopWatch.stop();
             stopWatch.unblockStartButton();
+            stopWatch.blockLoopButton();
             break;
         case 'loop':
             stopWatch.loop();
