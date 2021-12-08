@@ -3,15 +3,46 @@ let start = document.querySelector('.start');
 let loop = document.querySelector('.loop');
 let stop = document.querySelector('.stop');
 let reset = document.querySelector('.reset');
-let timeBlockText = document.querySelector('.time_block_text');
 let timeBlock = document.querySelector(".time_block");
 
 class StopWatch {
     constructor() {
         this.setInitialText();
+        document.addEventListener('click', this.onActionButtons(e))
     }
 
-    setInitialText(){
+    onActionButtons(e) {
+        const actionTypes = ['start', 'reset', 'stop', 'loop'];
+
+        let currentType;
+
+        for (let type of actionTypes) {
+            if (e.target.classList.contains(type)) currentType = type;
+        }
+
+        switch (currentType) {
+            case 'start':
+                this.secondsWork();
+                start.disabled = true;
+                this.unblockLoopButton();
+                break;
+            case 'reset':
+                this.reset();
+                this.unblockStartButton();
+                this.blockLoopButton();
+                break;
+            case 'stop':
+                this.stop();
+                this.unblockStartButton();
+                this.blockLoopButton();
+                break;
+            case 'loop':
+                this.loop();
+                break;
+        }
+    }
+
+    setInitialText() {
         this.hours = '0';
         this.minutes = '0';
         this.second = '0';
@@ -20,7 +51,7 @@ class StopWatch {
     }
 
     formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
-    
+
     seconds() {
         this.FormatNumber();
 
@@ -36,10 +67,10 @@ class StopWatch {
             this.hours++;
             this.minutes = 0;
         }
-        this.ms++;    
+        this.ms++;
     }
 
-    FormatNumber(){
+    FormatNumber() {
         const timeValues = [this.hours, this.minutes, this.second, this.ms]
         let string = '';
 
@@ -72,67 +103,42 @@ class StopWatch {
     }
 
     loop() {
+
         if (this.loopTextAmount >= 5) {
             timeBlock.firstChild.remove();
-            this.loopTextAmount = 5
+            this.loopTextAmount = 5;
+        } else {
+            this.loopTextAmount++;
         }
+        this.saveCurrentLoopValue();
+    }
 
-        let loopText = document.createElement('p');
-        loopText.classList.add('time_block_text')
-        loopText.textContent = `${timeBlockText.textContent}${watch.textContent}`;
-        timeBlock.append(loopText);
-        this.loopTextAmount++;
+    saveCurrentLoopValue() {
+
+        let loopValue = document.createElement('time');
+        loopValue.classList.add('time_block_text')
+        loopValue.textContent = `${watch.textContent}`;
+        timeBlock.append(loopValue);
+
     }
 
     clearLoopBlock() {
         timeBlock.innerHTML = '';
     }
 
-    unblockStartButton(){
+    unblockStartButton() {
         start.disabled = false;
     }
 
-    blockLoopButton(){
+    blockLoopButton() {
         loop.disabled = true;
     }
 
-    unblockLoopButton(){
+    unblockLoopButton() {
         loop.disabled = false;
     }
-
 }
 
-let stopWatch = new StopWatch(0, 0, 0, 0);
-
+let stopWatch = new StopWatch();
 stopWatch.blockLoopButton();
 
-document.addEventListener('click', function (e) {
-    const actionTypes = ['start', 'reset', 'stop', 'loop'];
-
-    let currentType;
-
-    for(let type of actionTypes){
-        if(e.target.classList.contains(type)) currentType = type;
-    }
-
-    switch (currentType) {
-        case 'start':
-            stopWatch.secondsWork();
-            start.disabled = true;
-            stopWatch.unblockLoopButton();
-            break;
-        case 'reset': 
-            stopWatch.reset();
-            stopWatch.unblockStartButton();
-            stopWatch.blockLoopButton();
-            break;
-        case 'stop':
-            stopWatch.stop();
-            stopWatch.unblockStartButton();
-            stopWatch.blockLoopButton();
-            break;
-        case 'loop':
-            stopWatch.loop();
-            break;
-    }
-})

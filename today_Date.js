@@ -11,8 +11,6 @@ class DateToday {
         this.days = now.getDate().toString();
         this.month = now.getMonth().toString();
         this.year = now.getFullYear().toString();
-
-        
     }
 
     formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
@@ -25,8 +23,6 @@ class DateToday {
         }
         return string;
     }
-
-
 
     start() {
         this.updateDate();
