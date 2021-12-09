@@ -8,7 +8,7 @@ let timeBlock = document.querySelector(".time_block");
 class StopWatch {
     constructor() {
         this.setInitialText();
-        document.addEventListener('click', this.onActionButtons(e))
+        document.addEventListener('click', (e) =>  this.onActionButtons(e))
     }
 
     onActionButtons(e) {
@@ -105,7 +105,7 @@ class StopWatch {
     loop() {
 
         if (this.loopTextAmount >= 5) {
-            timeBlock.firstChild.remove();
+            timeBlock.firstElementChild.remove();
             this.loopTextAmount = 5;
         } else {
             this.loopTextAmount++;
