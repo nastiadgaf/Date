@@ -11,6 +11,35 @@ class Timer {
     constructor() {
         this.minutes = +timer.innerHTML;
         this.seconds = 0;
+        document.addEventListener('click', (e) => this.onActionButtons(e))
+    }
+
+    onActionButtons(e) {
+        const actionTypes = ['plus', 'minus', 'start_timer', 'reset_timer', 'stop_timer'];
+
+        let currentType;
+
+        for (let type of actionTypes) {
+            if (e.target.dataset.action === type) currentType = type;
+        }
+
+        switch (currentType) {
+            case 'plus':
+                newTimer.plusWork();
+                break;
+            case 'minus':
+                newTimer.minusWork();
+                break;
+            case 'start_timer':
+                newTimer.startTimerWork();
+                break;
+            case 'reset_timer':
+                newTimer.resetTimerWork();
+                break;
+            case 'stop_timer':
+                newTimer.stopTimerWork();
+                break;
+        }
     }
 
     plusWork() {
@@ -24,7 +53,7 @@ class Timer {
         if (this.minutes < 1) {
             this.blockStartButton();
             return;
-        } 
+        }
         this.minutes--;
         timer.innerHTML = this.minutes;
         this.updateString();
@@ -83,49 +112,21 @@ class Timer {
         this.blockStartButton();
     }
 
-    endTimerWork(){
-        if(timerClock.innerHTML == '00:00'){
+    endTimerWork() {
+        if (timerClock.innerHTML == '00:00') {
             this.stopTimerWork();
             this.resetTimerWork();
             this.blockStartButton();
-        } 
+        }
     }
 
-    blockStartButton(){
+    blockStartButton() {
         startTimer.disabled = true;
     }
 
-    unblockStartButton(){
+    unblockStartButton() {
         startTimer.disabled = false;
     }
 }
 
 let newTimer = new Timer();
-
-document.addEventListener('click', function (e) {
-    const actionTypes = ['plus', 'minus', 'start_timer', 'reset_timer', 'stop_timer'];
-
-    let currentType;
-
-    for (let type of actionTypes) {
-        if (e.target.classList.contains(type)) currentType = type;
-    }
-
-    switch (currentType) {
-        case 'plus':
-            newTimer.plusWork();
-            break;
-        case 'minus':
-            newTimer.minusWork();
-            break;
-        case 'start_timer':
-            newTimer.startTimerWork();
-            break;
-        case 'reset_timer':
-            newTimer.resetTimerWork();
-            break;
-        case 'stop_timer':
-            newTimer.stopTimerWork();
-            break;
-    }
-})

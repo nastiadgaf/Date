@@ -5,6 +5,7 @@ let stop = document.querySelector('.stop');
 let reset = document.querySelector('.reset');
 let timeBlock = document.querySelector(".time_block");
 
+console.log(loop.dataset.action)
 class StopWatch {
     constructor() {
         this.setInitialText();
@@ -17,7 +18,7 @@ class StopWatch {
         let currentType;
 
         for (let type of actionTypes) {
-            if (e.target.classList.contains(type)) currentType = type;
+            if (e.target.dataset.action === type) currentType = type;
         }
 
         switch (currentType) {
@@ -53,7 +54,7 @@ class StopWatch {
     formatNumToTwoCharStr = num => num >= 10 ? num : `0${num}`;
 
     seconds() {
-        this.FormatNumber();
+        this.formatNumber();
 
         if (this.ms == 100) {
             this.second++;
@@ -70,7 +71,7 @@ class StopWatch {
         this.ms++;
     }
 
-    FormatNumber() {
+    formatNumber() {
         const timeValues = [this.hours, this.minutes, this.second, this.ms]
         let string = '';
 

@@ -19,10 +19,10 @@
         <div class="time">
             <time id="watch">00:00:00:000</time>
             <ul class="buttons">
-                <li class="item"><button class="button start" id="start">start</button></li>
-                <li class="item"><button class="button loop" id="loop">loop</button></li>
-                <li class="item"><button class="button stop" id="stop">stop</button></li>
-                <li class="item"><button class="button reset" id="reset">reset</button></li>
+                <li class="item"><button class="button start" id="start" data-action="start">start</button></li>
+                <li class="item"><button class="button loop" id="loop" data-action="loop">loop</button></li>
+                <li class="item"><button class="button stop" id="stop" data-action="stop">stop</button></li>
+                <li class="item"><button class="button reset" id="reset" data-action="reset">reset</button></li>
             </ul>
             
         </div>
@@ -36,8 +36,8 @@
             <time class="timer_time">00</time>
             <span class="text">minutes</span>
             <ul class="buttons">
-                <li class="item"><button class="plus_minus plus timer__btn">+</button></li>
-                <li class="item"><button class="plus_minus minus timer__btn">-</button></li>
+                <li class="item"><button class="plus_minus plus timer__btn" data-action="plus">+</button></li>
+                <li class="item"><button class="plus_minus minus timer__btn" data-action="minus">-</button></li>
             </ul>
             
         </div>
@@ -46,9 +46,9 @@
             <time class="timer_clock">00:00</time>
             <span class="text">minutes</span>
             <ul class="buttons">
-                <li class="item"><button class="button start_timer">start</button></li>
-                <li class="item"><button class="button stop_timer">stop</button></li>
-                <li class="item"><button class="button reset_timer">reset</button></li>
+                <li class="item"><button class="button start_timer" data-action="start_timer">start</button></li>
+                <li class="item"><button class="button stop_timer" data-action="stop_timer">stop</button></li>
+                <li class="item"><button class="button reset_timer" data-action="reset_timer">reset</button></li>
             </ul>
             
         </div>
